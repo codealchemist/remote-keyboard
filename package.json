@@ -1,0 +1,35 @@
+{
+  "name": "remote-keyboard",
+  "version": "1.0.0",
+  "description": "Send keyboard events from senders to receivers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard-focus",
+    "start": "node src/index.js"
+  },
+  "bin": {
+    "remote-keyboard": "src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codealchemist/remote-keyboard.git"
+  },
+  "keywords": [
+    "remote",
+    "keyboard"
+  ],
+  "author": "Alberto Miranda",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codealchemist/remote-keyboard/issues"
+  },
+  "homepage": "https://github.com/codealchemist/remote-keyboard#readme",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "clear": "^0.1.0",
+    "printii": "^1.0.0",
+    "robotjs": "^0.5.1",
+    "standard-focus": "^1.1.2",
+    "ws": "^5.2.1"
+  }
+}
