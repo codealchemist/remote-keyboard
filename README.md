@@ -1,10 +1,36 @@
 # remote-keyboard
 
-Send keyboard events from senders to receivers.
+Sends keyboard events between machines.
+
+## How does it work?
+
+**remote-keyboard** can be started as **emitter** or **receiver**.
+
+In both modes it needs to connect to a websocket server, which is not provided by **remote-keyboard**.
+
+All communication between emitters and receivers will be handled by the websocket server.
+
+An easy way to get going it to give it a try to [websocket-broadcast](https://github.com/codealchemist/websocket-broadcast).
+
+An **emitter** instance will send its keyboard events to all connected **receiver** instances.
+
+A **receiver** will receive the remote key events and reproduce them back.
+
+You can connect many **emitters** and many **receivers** ;)
 
 ## Install
 
 `npm i remote-keyboard`
+
+## Run without installing
+
+Receiver mode:
+
+`npx remote-keyboard`
+
+Emitter mode:
+
+`npx remote-keyboard emitter`
 
 ## Usage
 
