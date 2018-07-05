@@ -28,7 +28,6 @@
     "chalk": "^2.4.1",
     "clear": "^0.1.0",
     "loading-indicator": "^2.0.0",
-    "printii": "^1.0.0",
     "robotjs": "^0.5.1",
     "standard-focus": "^1.1.2",
     "ws": "^5.2.1"

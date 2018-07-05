@@ -1,3 +1,4 @@
+const fs = require('fs')
 const WebSocket = require('ws')
 const robot = require('robotjs')
 const chalk = require('chalk')
@@ -7,10 +8,21 @@ const KeyReader = require('./key-reader')
 
 class Receiver {
   constructor (host) {
-    console.log('MODE: RECEIVER')
-    this.keyReader = new KeyReader() // Provides exit key bindings.
     this.host = host
     this.loadingTimer
+    this.artFile = 'receiver.txt'
+  }
+
+  init () {
+    this.keyReader = new KeyReader() // Provides exit key bindings.
+    return this
+  }
+
+  printArt () {
+    const file = `${__dirname}/${this.artFile}`
+    const art = fs.readFileSync(file, 'utf8')
+    console.log(chalk.white(art))
+    return this
   }
 
   connect () {
@@ -28,11 +40,11 @@ class Receiver {
       this.log(message)
       const key = JSON.parse(message)
       if (!key.name || !key.sequence) return
-      let modifier
-      if (key.ctrl) modifier = 'control'
-      if (key.shift) modifier = 'shift'
+      let modifier = []
+      if (key.ctrl) modifier.push('control')
+      if (key.shift) modifier.push('shift')
 
-      robot.keyTap(key.name)
+      robot.keyTap(key.sequence, modifier)
     })
 
     this.ws.on('close', () => {

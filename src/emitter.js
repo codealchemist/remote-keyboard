@@ -1,3 +1,4 @@
+const fs = require('fs')
 const WebSocket = require('ws')
 const chalk = require('chalk')
 const loading = require('loading-indicator')
@@ -6,10 +7,22 @@ const KeyReader = require('./key-reader')
 
 class Emitter {
   constructor (host) {
-    console.log('MODE: EMITTER')
+    this.host = host
+    this.loadingTimer
+    this.artFile = 'emitter.txt'
+  }
+
+  init () {
     this.keyReader = new KeyReader() // Provides exit key bindings.
     this.keyReader.onKey(key => this.onKey(key))
-    this.host = host
+    return this
+  }
+
+  printArt () {
+    const file = `${__dirname}/${this.artFile}`
+    const art = fs.readFileSync(file, 'utf8')
+    console.log(chalk.white(art))
+    return this
   }
 
   connect () {
