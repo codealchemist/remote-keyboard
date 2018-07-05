@@ -6,11 +6,11 @@ class KeyReader {
     readline.emitKeypressEvents(process.stdin)
     process.stdin.setRawMode(true)
 
-    console.log(`Exit with ${chalk.red('q')} or ${chalk.red('ctrl+c')}`)
+    console.log(`Exit with ${chalk.red('ctrl+c')}`)
 
     process.stdin.on('keypress', (str, key) => {
-      // Exit on q or ctrl+c.
-      if (key.name === 'q' || key.sequence === '\u0003') {
+      // Exit on ctrl+c.
+      if (key.sequence === '\u0003') {
         console.log('\n\n', chalk.gray('Bye!'))
         process.exit()
       }

@@ -42,7 +42,7 @@ class Emitter {
   }
 
   onKey (key) {
-    this.log(`KEY: ${chalk.white(key.sequence)}`)
+    this.log(`KEY: ${chalk.white(key.name || key.sequence)}`)
     const message = JSON.stringify(key)
     this.ws.send(message)
   }
