@@ -48,7 +48,7 @@ class Emitter {
   }
 
   log (message) {
-    process.stdout.write(' '.repeat(80))
+    process.stdout.clearLine()
     process.stdout.write(`\r${message}\r`)
   }
 }

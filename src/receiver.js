@@ -39,12 +39,19 @@ class Receiver {
     this.ws.on('message', (message) => {
       this.log(message)
       const key = JSON.parse(message)
-      if (!key.name || !key.sequence) return
+      if (!key.sequence) return
       let modifier = []
       if (key.ctrl) modifier.push('control')
       if (key.shift) modifier.push('shift')
 
-      robot.keyTap(key.sequence, modifier)
+      // Key replacements.
+      const outputKey = this.applyKeyReplacements(key)
+
+      try {
+        robot.keyTap(outputKey, modifier)
+      } catch (e) {
+        this.log(`Unsupported key: ${chalk.red(outputKey)}`)
+      }
     })
 
     this.ws.on('close', () => {
@@ -52,12 +59,19 @@ class Receiver {
     })
   }
 
+  applyKeyReplacements (key) {
+    const named = ['up', 'down', 'left', 'right', 'pagedown', 'pageup', 'backspace']
+    if (named.includes(key.name)) return key.name
+
+    return key.sequence
+  }
+
   onRemoteKey (key) {
     this.log(`KEY: ${chalk.white(key)}`)
   }
 
   log (message) {
-    process.stdout.write(' '.repeat(80))
+    process.stdout.clearLine()
     process.stdout.write(`\r${message}\r`)
   }
 }
