@@ -30,7 +30,13 @@ class Receiver {
       `Connecting to ${chalk.blue(this.host)}`,
       { frames: presets.dots }
     )
+
     this.ws = new WebSocket(this.host)
+    this.ws.on('error', (e) => {
+      this.log(`${chalk.red(`ERROR: ${e.message}`)}\n\n`)
+      process.exit()
+    })
+
     this.ws.on('open', () => {
       loading.stop(this.loadingTimer)
       this.log(`Connected to ${chalk.blue(this.host)}`)

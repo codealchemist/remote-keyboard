@@ -11,7 +11,7 @@ class KeyReader {
     process.stdin.on('keypress', (str, key) => {
       // Exit on ctrl+c.
       if (key.sequence === '\u0003') {
-        console.log('\n\n', chalk.gray('Bye!'))
+        console.log(chalk.gray('\n\nBye!'))
         process.exit()
       }
 
